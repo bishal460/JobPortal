@@ -7,7 +7,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             Adder add = (Adder) Naming.lookup("//localhost/MyServer");
-            if(add.signUp("bishal","bishal")){
+            if(add.loginUser("admin","admin")){
                 System.out.println("Your account is created");
             }else{
                 System.out.println("Your account is not created");
