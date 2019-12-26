@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class JobController implements JobInterface {
     Connection conn;
@@ -19,17 +18,13 @@ public class JobController implements JobInterface {
     @Override
     public void addJob(Job j) {
         try{
-            String sql="INSERT INTO JOB(job_category, job_vacancy, Employment_type, location, salary, deadline, education_level, experience, posted_by) VALUES(?,?,?,?,?,?,?,?,?)";
+            String sql="INSERT INTO JOB(job_category,location,salary,experience,posted_by) VALUES(?,?,?,?,?)";
             PreparedStatement ps=conn.prepareStatement(sql);
             ps.setString(1, j.getJob_category());
-            ps.setString(2, j.getJob_vacancy());
-            ps.setString(3, j.getEmployment_type());
-            ps.setString(4, j.getLocation());
-            ps.setString(5, j.getSalary());
-            ps.setString(6, j.getDeadline());
-            ps.setString(7, j.getEducation_level());
-            ps.setString(8, j.getExperience());
-            ps.setString(9, j.getPosted_by());
+            ps.setString(2, j.getLocation());
+            ps.setString(3, j.getSalary());
+            ps.setString(4, j.getExperience());
+            ps.setString(5, j.getPosted_by());
             ps.execute();
         }
         catch(SQLException e){
@@ -38,35 +33,40 @@ public class JobController implements JobInterface {
     }
 
     @Override
-    public List<Job> viewJob(Job j) {
-        List<Job> list = null;
+    public ResultSet viewJob() {
+        ResultSet rs = null;
         try{
-            String sql="SELECT * FROM STUDENT";
+            System.out.println("Start to search");
+            String sql="SELECT * FROM job";
             PreparedStatement ps=conn.prepareStatement(sql);
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
-                Job job = new Job();
-                job.setJob_category(rs.getString(2));
-                job.setJob_vacancy(rs.getString(3));
-                job.setEmployment_type(rs.getString(4));
-                job.setLocation(rs.getString(5));
-                job.setSalary(rs.getString(6));
-                job.setDeadline(rs.getString(7));
-                job.setEducation_level(rs.getString(8));
-                job.setExperience(rs.getString(9));
-                job.setPosted_by(rs.getString(10));
-                list.add(job);
-            }
-
-            return list;
+            rs=ps.executeQuery();
+            return rs;
         }
-        catch(SQLException e){
-
+        catch(Exception e){
+            System.out.println("Exceptiion");
+            e.printStackTrace();
         }
         return null;
     }
 
     @Override
+    public void addMyjob(String[] data) {
+        try{
+            String sql="INSERT INTO apply_job(userid,job_title,location,salary,experience) VALUES(?,?,?,?,?)";
+            PreparedStatement ps=conn.prepareStatement(sql);
+            ps.setString(1,data[0]);
+            ps.setString(2, data[1]);
+            ps.setString(3, data[2]);
+            ps.setString(4, data[3]);
+            ps.setString(5, data[4]);
+            ps.execute();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
     public boolean updateJob(Job j) {
         try{
             String sql="UPDATE JOB SET job_category=?, job_vacancy=?, Employment_type=?, location=?, salary=?, deadline=?, education_level=?, experience=?, posted_by=?  WHERE id=?";
@@ -89,7 +89,6 @@ public class JobController implements JobInterface {
         }
     }
 
-    @Override
     public boolean deleteJob(Job j) {
         try{
             String sql="DELETE JOB SET job_category=?, job_vacancy=?, Employment_type=?, location=?, salary=?, deadline=?, education_level=?, experience=?, posted_by=?  WHERE id=?";

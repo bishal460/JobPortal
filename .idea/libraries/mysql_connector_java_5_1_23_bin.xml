@@ -3,9 +3,11 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../New folder/mysql-connector-java-5.1.23-bin.jar!/" />
       <root url="jar://$PROJECT_DIR$/../javax.mail.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../material-ui-swing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../java-json.jar/java-json.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../java-json.jar/java-json.jar!/" />
+    </SOURCES>
   </library>
 </component>

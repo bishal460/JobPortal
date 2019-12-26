@@ -1,6 +1,8 @@
 package Model;
 
-public class Job {
+import java.io.Serializable;
+
+public class Job implements Serializable {
     private int id;
     private String job_category, job_vacancy, Employment_type, location, salary, deadline, education_level, experience, posted_by;
 

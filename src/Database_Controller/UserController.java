@@ -32,11 +32,13 @@ public class UserController implements UserInterface {
 
     @Override
     public void signupUser(User u) {
+        System.out.println(u.getUsername()+"/"+u.getPassword()+"/"+u.getEmail());
         try{
-            String sql="INSERT INTO USERS(USERNAME,PASSWORD) VALUES(?,?)";
+            String sql="INSERT INTO USERS(USERNAME,PASSWORD,EMAIL) VALUES(?,?,?)";
             PreparedStatement ps=cn.prepareStatement(sql);
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getPassword());
+            ps.setString(3, u.getEmail());
             ps.execute();
         }
         catch(SQLException e){
