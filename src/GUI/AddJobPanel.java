@@ -111,13 +111,13 @@ public class AddJobPanel extends JPanel {
         date.setText("Date : "+myResponse.getString("date"));
         System.out.println(myResponse.getJSONObject("rates").getInt("GBP"));
         model.addRow(new String[]{"GBP",myResponse.getJSONObject("rates").get("GBP").toString()});
-        model.addRow(new String[]{"HKD",myResponse.getJSONObject("rates").get("GBP").toString()});
-        model.addRow(new String[]{"IDR",myResponse.getJSONObject("rates").get("GBP").toString()});
-        model.addRow(new String[]{"ILS",myResponse.getJSONObject("rates").get("GBP").toString()});
-        model.addRow(new String[]{"DKK",myResponse.getJSONObject("rates").get("GBP").toString()});
-        model.addRow(new String[]{"INR",myResponse.getJSONObject("rates").get("GBP").toString()});
-        model.addRow(new String[]{"CHF",myResponse.getJSONObject("rates").get("GBP").toString()});
-        model.addRow(new String[]{"MXN",myResponse.getJSONObject("rates").get("GBP").toString()});
+        model.addRow(new String[]{"HKD",myResponse.getJSONObject("rates").get("HKD").toString()});
+        model.addRow(new String[]{"IDR",myResponse.getJSONObject("rates").get("IDR").toString()});
+        model.addRow(new String[]{"ILS",myResponse.getJSONObject("rates").get("ILS").toString()});
+        model.addRow(new String[]{"DKK",myResponse.getJSONObject("rates").get("DKK").toString()});
+        model.addRow(new String[]{"INR",myResponse.getJSONObject("rates").get("INR").toString()});
+        model.addRow(new String[]{"CHF",myResponse.getJSONObject("rates").get("CHF").toString()});
+        model.addRow(new String[]{"MXN",myResponse.getJSONObject("rates").get("MXN").toString()});
 
     }
 

@@ -1,9 +1,12 @@
 package GUI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class SignUpPanel extends JPanel {
     private static SignUPinterface sign;
@@ -13,30 +16,56 @@ public class SignUpPanel extends JPanel {
         super(layout, isDoubleBuffered);
         sign = jobPortalFrame;
         JLabel hello = new JLabel("Create Your Account");
-        hello.setBounds(480/2,20,80,30);
+        hello.setBounds(480/2,20,280,30);
+        hello.setFont(new Font("Verdana",Font.BOLD,20));
+        hello.setBackground(Color.WHITE);
+        hello.setForeground(Color.WHITE);
 
         JLabel usernamelabel = new JLabel("Username");
-        usernamelabel.setBounds(20,120,80,30);
+        usernamelabel.setBounds(480/2,90,120,30);
+        usernamelabel.setFont(new Font("Verdana",Font.PLAIN,15));
+        usernamelabel.setForeground(Color.WHITE);
+        usernamelabel.setBackground(Color.WHITE);
 
         username = new JTextField();
-        username.setBounds(120,120,120,30);
+        username.setBounds(480/2,120,120,30);
+        username.setOpaque(false);
+        username.setFont(new Font("Verdana",Font.PLAIN,14));
+        username.setForeground(Color.WHITE);;
 
         JLabel passwordlabel = new JLabel("Password");
-        passwordlabel.setBounds(20,220,80,30);
+        passwordlabel.setBounds(480/2,190,80,30);
+        passwordlabel.setFont(new Font("Verdana",Font.PLAIN,15));
+        passwordlabel.setForeground(Color.WHITE);
+        passwordlabel.setBackground(Color.WHITE);
 
         password = new JPasswordField();
-        password.setBounds(120,220,120,30);
+        password.setBounds(480/2,220,120,30);
+        password.setOpaque(false);
+        password.setFont(new Font("Verdana",Font.PLAIN,14));
+        password.setForeground(Color.WHITE);
 
         JLabel emaillabel = new JLabel("Email");
-        emaillabel.setBounds(20,320,80,30);
+        emaillabel.setBounds(480/2,260,80,30);
+        emaillabel.setFont(new Font("Verdana",Font.PLAIN,15));
+        emaillabel.setForeground(Color.WHITE);
+        emaillabel.setBackground(Color.WHITE);
 
         email = new JTextField();
-        email.setBounds(120,320,140,30);
+        email.setOpaque(false);
+        email.setFont(new Font("Verdana",Font.PLAIN,14));
+        email.setForeground(Color.WHITE);
+        email.setBounds(480/2,290,140,30);
 
 
         signupButton = new JButton();
         signupButton.setText("Sign UP");
-        signupButton.setBounds(20,380,80,30);
+        signupButton.setBounds(480/2,350,120,30);
+        signupButton.setFont(new Font("Verdana",Font.PLAIN,16));
+        signupButton.setOpaque(false);
+        signupButton.setContentAreaFilled(false);
+        signupButton.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+        signupButton.setForeground(Color.WHITE);
         signUpListener();
 
 
@@ -57,6 +86,17 @@ public class SignUpPanel extends JPanel {
                 sign.onSignup(username.getText(),password.getText(),email.getText());
             }
         });
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        try {
+            Image image = ImageIO.read(new File("apple.jpg"));
+            g.drawImage(image,0,0,getWidth(),getHeight(),this);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Could not find Image");
+        }
     }
 
     interface SignUPinterface{

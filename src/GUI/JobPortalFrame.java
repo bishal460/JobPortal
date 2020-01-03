@@ -6,6 +6,7 @@ import javax.mail.internet.InternetAddress;
 import javax.swing.*;
 import java.awt.*;
 import java.rmi.AccessException;
+import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -27,6 +28,7 @@ public class JobPortalFrame extends JFrame implements LoginPanel.LoginPanelInter
         addjobpanel = new AddJobPanel(null, false, this);
         viewjobpanel = new ViewJobPanel(null, false, this,viewmyjobpanel);
         this.setContentPane(loginPanel);
+        this.setLocation(480,200);
     }
 
     public static void main(String[] args) {
@@ -54,6 +56,7 @@ public class JobPortalFrame extends JFrame implements LoginPanel.LoginPanelInter
                 loginPanel.setVisible(false);
                 this.setContentPane(dashboardpanel);
                 dashboardpanel.setVisible(true);
+                this.setLocation(20,20);
                 this.setSize(1280, 720);
             }else{
                 JOptionPane.showMessageDialog(this,
@@ -62,6 +65,8 @@ public class JobPortalFrame extends JFrame implements LoginPanel.LoginPanelInter
             }
         } catch (AccessException e) {
             e.printStackTrace();
+        } catch (ConnectException e){
+            JOptionPane.showMessageDialog(this,"Connection to server failed. Please make sure backend server is available.");
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
